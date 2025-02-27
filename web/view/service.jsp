@@ -120,8 +120,8 @@
 								<!-- breadcrumb-list - start -->
 								<div class="breadcrumb-list">
 									<ul>
-										<li class="breadcrumb-item"><a href="index-1.html" class="breadcrumb-link">Home</a></li>
-										<li class="breadcrumb-item"><a href="#!" class="breadcrumb-link">About</a></li>
+										<li class="breadcrumb-item"><a href="home.jsp" class="breadcrumb-link">Home</a></li>
+										<li class="breadcrumb-item"><a href="about.jsp" class="breadcrumb-link">About</a></li>
 										<li class="breadcrumb-item active" aria-current="page">services</li>
 									</ul>
 								</div>

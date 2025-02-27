@@ -32,15 +32,15 @@
                                     <li class="menu-item-has-children">
                                         <a href="home.jsp">home</a>
                                     </li>
-                                    <li class="menu-item-has-children active">
-                                        <a href="#!">about</a>
+                                    <li class="menu-item-has-children">
+                                        <a href="about.jsp">about</a>
                                         <ul class="sub-menu">
-                                            <li><a href="about.jsp" class="active">about us</a></li>
+                                            <li><a href="about.jsp">about us</a></li>
                                             <li><a href='service.jsp'>service</a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#!">events</a>
+                                        <a href="list-event.jsp">events</a>
                                         <ul class="sub-menu">
                                             <li class="menu-item-has-children">
                                                 <a href='list-event.jsp'>event List</a>
