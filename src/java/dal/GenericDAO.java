@@ -42,7 +42,7 @@ public abstract class GenericDAO<T> extends DBContext {
 
             // Tạo câu lệnh SELECT
             StringBuilder sqlBuilder = new StringBuilder();
-            sqlBuilder.append("SELECT * FROM ").append(clazz.getSimpleName());
+            sqlBuilder.append("SELECT * FROM [").append(clazz.getSimpleName()).append("]");
 
             // Chuẩn bị câu lệnh
             statement = connection.prepareStatement(sqlBuilder.toString());
@@ -564,7 +564,7 @@ public abstract class GenericDAO<T> extends DBContext {
 
             // Tạo câu lệnh SELECT
             StringBuilder sqlBuilder = new StringBuilder();
-            sqlBuilder.append("SELECT COUNT(*) FROM ").append(clazz.getSimpleName());
+            sqlBuilder.append("SELECT COUNT(*) FROM [").append(clazz.getSimpleName()).append("]");
             //List parameter
             List<Object> parameters = new ArrayList<>();
 

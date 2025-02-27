@@ -11,57 +11,57 @@ import java.time.LocalDateTime;
  * @author Admin
  */
 public class Payment {
-    private int paymentId;
-    private int userId; // Foreign key to User
-    private int eventId; // Foreign key to Event
-    private int ticketId; // Foreign key to Ticket
+    private int payment_id;
+    private int user_id; // Foreign key to User
+    private int event_id; // Foreign key to Event
+    private int ticket_id; // Foreign key to Ticket
     private double amount; // Số tiền thanh toán (USD)
-    private LocalDateTime paymentDate;
+    private LocalDateTime payment_date;
     private String status; // PENDING, COMPLETED, FAILED
 
     public Payment() {
     }
 
-    public Payment(int paymentId, int userId, int eventId, int ticketId, double amount, LocalDateTime paymentDate, String status) {
-        this.paymentId = paymentId;
-        this.userId = userId;
-        this.eventId = eventId;
-        this.ticketId = ticketId;
+    public Payment(int payment_id, int user_id, int event_id, int ticket_id, double amount, LocalDateTime payment_date, String status) {
+        this.payment_id = payment_id;
+        this.user_id = user_id;
+        this.event_id = event_id;
+        this.ticket_id = ticket_id;
         this.amount = amount;
-        this.paymentDate = paymentDate;
+        this.payment_date = payment_date;
         this.status = status;
     }
 
-    public int getPaymentId() {
-        return paymentId;
+    public int getPayment_id() {
+        return payment_id;
     }
 
-    public void setPaymentId(int paymentId) {
-        this.paymentId = paymentId;
+    public void setPayment_id(int payment_id) {
+        this.payment_id = payment_id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public int getEventId() {
-        return eventId;
+    public int getEvent_id() {
+        return event_id;
     }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
+    public void setEvent_id(int event_id) {
+        this.event_id = event_id;
     }
 
-    public int getTicketId() {
-        return ticketId;
+    public int getTicket_id() {
+        return ticket_id;
     }
 
-    public void setTicketId(int ticketId) {
-        this.ticketId = ticketId;
+    public void setTicket_id(int ticket_id) {
+        this.ticket_id = ticket_id;
     }
 
     public double getAmount() {
@@ -73,11 +73,11 @@ public class Payment {
     }
 
     public LocalDateTime getPaymentDate() {
-        return paymentDate;
+        return payment_date;
     }
 
-    public void setPaymentDate(LocalDateTime paymentDate) {
-        this.paymentDate = paymentDate;
+    public void setPaymentDate(LocalDateTime payment_date) {
+        this.payment_date = payment_date;
     }
 
     public String getStatus() {
@@ -86,6 +86,11 @@ public class Payment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" + "payment_id=" + payment_id + ", user_id=" + user_id + ", event_id=" + event_id + ", ticket_id=" + ticket_id + ", amount=" + amount + ", payment_date=" + payment_date + ", status=" + status + '}';
     }
     
     

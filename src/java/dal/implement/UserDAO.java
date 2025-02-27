@@ -21,4 +21,10 @@ public class UserDAO extends GenericDAO<User> {
     public int insert(User user) {
         return insertGenericDAO(user);
     }
+    
+    public static void main(String[] args) {
+        for (User user : new UserDAO().findAll()) {
+            System.out.println(user);
+        }
+    }
 }

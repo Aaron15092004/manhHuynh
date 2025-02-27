@@ -18,4 +18,6 @@ public class RegistrationDAO extends GenericDAO<Registration> {
     public int insert(Registration registration) {
         return insertGenericDAO(registration);
     }
+    
+    
 }

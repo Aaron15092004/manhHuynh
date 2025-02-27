@@ -9,31 +9,36 @@ package entity;
  * @author Admin
  */
 public class EventCategory {
-    private int eventId; // Foreign key to Event
-    private int categoryId; // Foreign key to Category
+    private int event_id; // Foreign key to Event
+    private int category_id; // Foreign key to Category
 
     public EventCategory() {
     }
 
-    public EventCategory(int eventId, int categoryId) {
-        this.eventId = eventId;
-        this.categoryId = categoryId;
+    public EventCategory(int event_id, int category_id) {
+        this.event_id = event_id;
+        this.category_id = category_id;
     }
 
-    public int getEventId() {
-        return eventId;
+    public int getEvent_id() {
+        return event_id;
     }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
+    public void setEvent_id(int event_id) {
+        this.event_id = event_id;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+
+    @Override
+    public String toString() {
+        return "EventCategory{" + "event_id=" + event_id + ", category_id=" + category_id + '}';
     }
     
     

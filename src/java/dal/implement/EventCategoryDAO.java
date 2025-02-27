@@ -19,4 +19,5 @@ public class EventCategoryDAO extends GenericDAO<EventCategory> {
     public int insert(EventCategory eventCategory) {
         return insertGenericDAO(eventCategory);
     }
+    
 }

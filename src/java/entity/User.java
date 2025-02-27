@@ -9,8 +9,8 @@ package entity;
  * @author Admin
  */
 public class User {
-    private int userId;
-    private String fullName;
+    private int user_id;
+    private String full_name;
     private String email;
     private String password;
     private String role; // EVENT_CREATOR, ATTENDEE, ADMIN
@@ -19,9 +19,9 @@ public class User {
     public User() {
     }
 
-    public User(int userId, String fullName, String email, String password, String role, String status) {
-        this.userId = userId;
-        this.fullName = fullName;
+    public User(int user_id, String full_name, String email, String password, String role, String status) {
+        this.user_id = user_id;
+        this.full_name = full_name;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -29,19 +29,19 @@ public class User {
     }
 
     public int getUserId() {
-        return userId;
+        return user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserId(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getFullName() {
-        return fullName;
+        return full_name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullName(String full_name) {
+        this.full_name = full_name;
     }
 
     public String getEmail() {
@@ -74,6 +74,11 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "user_id=" + user_id + ", full_name=" + full_name + ", email=" + email + ", password=" + password + ", role=" + role + ", status=" + status + '}';
     }
     
     

@@ -19,4 +19,5 @@ public class TicketDAO extends GenericDAO<Ticket> {
     public int insert(Ticket ticket) {
         return insertGenericDAO(ticket);
     }
+    
 }
