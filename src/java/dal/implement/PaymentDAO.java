@@ -18,10 +18,5 @@ public class PaymentDAO extends GenericDAO<Payment> {
     public int insert(Payment payment) {
         return insertGenericDAO(payment);
     }
-    
-    public static void main(String[] args) {
-        for (Payment user : new PaymentDAO().findAll()) {
-            System.out.println(user);
-        }
-    }
+
 }

@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1149,7 +1149,7 @@
                     <!-- conference-event - start -->
                     <div id="conference-event" class="tab-pane fade">
                         <div class="row">
-
+                            <c:forEach items="${listEvent}" var="e">
                             <!-- event-item - start -->
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <div class="event-item clearfix">
@@ -1168,7 +1168,7 @@
                                     <div class="event-content">
                                         <div class="event-title mb-15">
                                             <h3 class="title">
-                                                Barcelona Food truck Festival 2018
+                                                ${e.title}
                                             </h3>
                                             <span class="ticket-price yellow-color">Tickets from $52</span>
                                         </div>
@@ -1197,247 +1197,7 @@
                                 </div>
                             </div>
                             <!-- event-item - end -->
-
-                            <!-- event-item - start -->
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <div class="event-item clearfix">
-
-                                    <!-- event-image - start -->
-                                    <div class="event-image">
-                                        <div class="post-date">
-                                            <span class="date">26</span>
-                                            <small class="month">june</small>
-                                        </div>
-                                        <img src="${pageContext.request.contextPath}/assets/images/event/event-2.jpg" alt="Image_not_found">
-                                    </div>
-                                    <!-- event-image - end -->
-
-                                    <!-- event-content - start -->
-                                    <div class="event-content">
-                                        <div class="event-title mb-15">
-                                            <h3 class="title">
-                                                Barcelona Food truck Festival 2018
-                                            </h3>
-                                            <span class="ticket-price yellow-color">Tickets from $52</span>
-                                        </div>
-                                        <div class="event-post-meta ul-li-block mb-30">
-                                            <ul>
-                                                <li>
-                                                    <span class="icon">
-                                                        <i class="far fa-clock"></i>
-                                                    </span>
-                                                    Start 20:00pm - 22:00pm
-                                                </li>
-                                                <li>
-                                                    <span class="icon">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </span>
-                                                    Manhattan, New York
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <a href="#!" class="tickets-details-btn">
-                                            tickets & details
-                                        </a>
-                                    </div>
-                                    <!-- event-content - end -->
-
-                                </div>
-                            </div>
-                            <!-- event-item - end -->
-
-                            <!-- event-item - start -->
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <div class="event-item clearfix">
-
-                                    <!-- event-image - start -->
-                                    <div class="event-image">
-                                        <div class="post-date">
-                                            <span class="date">26</span>
-                                            <small class="month">june</small>
-                                        </div>
-                                        <img src="${pageContext.request.contextPath}/assets/images/event/event-3.jpg" alt="Image_not_found">
-                                    </div>
-                                    <!-- event-image - end -->
-
-                                    <!-- event-content - start -->
-                                    <div class="event-content">
-                                        <div class="event-title mb-15">
-                                            <h3 class="title">
-                                                Barcelona Food truck Festival 2018
-                                            </h3>
-                                            <span class="ticket-price yellow-color">Tickets from $52</span>
-                                        </div>
-                                        <div class="event-post-meta ul-li-block mb-30">
-                                            <ul>
-                                                <li>
-                                                    <span class="icon">
-                                                        <i class="far fa-clock"></i>
-                                                    </span>
-                                                    Start 20:00pm - 22:00pm
-                                                </li>
-                                                <li>
-                                                    <span class="icon">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </span>
-                                                    Manhattan, New York
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <a href="#!" class="tickets-details-btn">
-                                            tickets & details
-                                        </a>
-                                    </div>
-                                    <!-- event-content - end -->
-
-                                </div>
-                            </div>
-                            <!-- event-item - end -->
-
-                            <!-- event-item - start -->
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <div class="event-item clearfix">
-
-                                    <!-- event-image - start -->
-                                    <div class="event-image">
-                                        <div class="post-date">
-                                            <span class="date">26</span>
-                                            <small class="month">june</small>
-                                        </div>
-                                        <img src="${pageContext.request.contextPath}/assets/images/event/event-4.jpg" alt="Image_not_found">
-                                    </div>
-                                    <!-- event-image - end -->
-
-                                    <!-- event-content - start -->
-                                    <div class="event-content">
-                                        <div class="event-title mb-15">
-                                            <h3 class="title">
-                                                Barcelona Food truck Festival 2018
-                                            </h3>
-                                            <span class="ticket-price yellow-color">Tickets from $52</span>
-                                        </div>
-                                        <div class="event-post-meta ul-li-block mb-30">
-                                            <ul>
-                                                <li>
-                                                    <span class="icon">
-                                                        <i class="far fa-clock"></i>
-                                                    </span>
-                                                    Start 20:00pm - 22:00pm
-                                                </li>
-                                                <li>
-                                                    <span class="icon">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </span>
-                                                    Manhattan, New York
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <a href="#!" class="tickets-details-btn">
-                                            tickets & details
-                                        </a>
-                                    </div>
-                                    <!-- event-content - end -->
-
-                                </div>
-                            </div>
-                            <!-- event-item - end -->
-
-                            <!-- event-item - start -->
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <div class="event-item clearfix">
-
-                                    <!-- event-image - start -->
-                                    <div class="event-image">
-                                        <div class="post-date">
-                                            <span class="date">26</span>
-                                            <small class="month">june</small>
-                                        </div>
-                                        <img src="${pageContext.request.contextPath}/assets/images/event/event-5.jpg" alt="Image_not_found">
-                                    </div>
-                                    <!-- event-image - end -->
-
-                                    <!-- event-content - start -->
-                                    <div class="event-content">
-                                        <div class="event-title mb-15">
-                                            <h3 class="title">
-                                                Barcelona Food truck Festival 2018
-                                            </h3>
-                                            <span class="ticket-price yellow-color">Tickets from $52</span>
-                                        </div>
-                                        <div class="event-post-meta ul-li-block mb-30">
-                                            <ul>
-                                                <li>
-                                                    <span class="icon">
-                                                        <i class="far fa-clock"></i>
-                                                    </span>
-                                                    Start 20:00pm - 22:00pm
-                                                </li>
-                                                <li>
-                                                    <span class="icon">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </span>
-                                                    Manhattan, New York
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <a href="#!" class="tickets-details-btn">
-                                            tickets & details
-                                        </a>
-                                    </div>
-                                    <!-- event-content - end -->
-
-                                </div>
-                            </div>
-                            <!-- event-item - end -->
-
-                            <!-- event-item - start -->
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <div class="event-item clearfix">
-
-                                    <!-- event-image - start -->
-                                    <div class="event-image">
-                                        <div class="post-date">
-                                            <span class="date">26</span>
-                                            <small class="month">june</small>
-                                        </div>
-                                        <img src="${pageContext.request.contextPath}/assets/images/event/event-6.jpg" alt="Image_not_found">
-                                    </div>
-                                    <!-- event-image - end -->
-
-                                    <!-- event-content - start -->
-                                    <div class="event-content">
-                                        <div class="event-title mb-15">
-                                            <h3 class="title">
-                                                Barcelona Food truck Festival 2018
-                                            </h3>
-                                            <span class="ticket-price yellow-color">Tickets from $52</span>
-                                        </div>
-                                        <div class="event-post-meta ul-li-block mb-30">
-                                            <ul>
-                                                <li>
-                                                    <span class="icon">
-                                                        <i class="far fa-clock"></i>
-                                                    </span>
-                                                    Start 20:00pm - 22:00pm
-                                                </li>
-                                                <li>
-                                                    <span class="icon">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </span>
-                                                    Manhattan, New York
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <a href="#!" class="tickets-details-btn">
-                                            tickets & details
-                                        </a>
-                                    </div>
-                                    <!-- event-content - end -->
-
-                                </div>
-                            </div>
-                            <!-- event-item - end -->
-
+                            </c:forEach>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="pagination ul-li clearfix">
                                     <ul>
@@ -1457,6 +1217,7 @@
                             </div>
 
                         </div>
+                                    
                     </div>
                     <!-- conference-event - end -->
 

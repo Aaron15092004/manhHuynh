@@ -20,4 +20,9 @@ public class EventDAO extends GenericDAO<Event> {
         return insertGenericDAO(event);
     }
 
+    public static void main(String[] args) {
+        for (Event user : new EventDAO().findAll()) {
+            System.out.println(user);
+        }
+    }
 }
