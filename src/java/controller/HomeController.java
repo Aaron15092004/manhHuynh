@@ -23,15 +23,6 @@ public class HomeController extends HttpServlet {
 
     EventDAO eventDAO = new EventDAO();
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -49,15 +40,6 @@ public class HomeController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,28 +50,26 @@ public class HomeController extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("listEvent", listEvent);
 
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+        // Log để kiểm tra
+        System.out.println("Đang chuyển hướng đến /view/home.jsp");
+
+        try {
+            // Chuyển hướng đến trang JSP
+            request.getRequestDispatcher("view/home.jsp").forward(request, response);
+            System.out.println("Đã chuyển hướng xong");
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+            System.out.println("Lỗi khi chuyển hướng: " + e.getMessage());
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
