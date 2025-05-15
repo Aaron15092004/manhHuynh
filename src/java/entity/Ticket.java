@@ -9,45 +9,36 @@ package entity;
  * @author Admin
  */
 public class Ticket {
+
     private int ticket_id;
     private int event_id; // Foreign key to Event
-    private String ticket_type; // VIP, Standard, Early Bird
     private double price; // Giá vé (USD)
-    private int quantity; // Số lượng vé
+    private int available_quantity; // Số lượng vé
 
     public Ticket() {
     }
 
-    public Ticket(int ticket_id, int event_id, String ticket_type, double price, int quantity) {
+    public Ticket(int ticket_id, int event_id, double price, int available_quantity) {
         this.ticket_id = ticket_id;
         this.event_id = event_id;
-        this.ticket_type = ticket_type;
         this.price = price;
-        this.quantity = quantity;
+        this.available_quantity = available_quantity;
     }
 
-    public int getTicketId() {
+    public int getTicket_id() {
         return ticket_id;
     }
 
-    public void setTicketId(int ticket_id) {
+    public void setTicket_id(int ticket_id) {
         this.ticket_id = ticket_id;
     }
 
-    public int getEventId() {
+    public int getEvent_id() {
         return event_id;
     }
 
-    public void setEventId(int event_id) {
+    public void setEvent_id(int event_id) {
         this.event_id = event_id;
-    }
-
-    public String getTicketType() {
-        return ticket_type;
-    }
-
-    public void setTicketType(String ticket_type) {
-        this.ticket_type = ticket_type;
     }
 
     public double getPrice() {
@@ -58,18 +49,17 @@ public class Ticket {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getAvailable_quantity() {
+        return available_quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setAvailable_quantity(int available_quantity) {
+        this.available_quantity = available_quantity;
     }
 
     @Override
     public String toString() {
-        return "Ticket{" + "ticket_id=" + ticket_id + ", event_id=" + event_id + ", ticket_type=" + ticket_type + ", price=" + price + ", quantity=" + quantity + '}';
+        return "Ticket{" + "ticket_id=" + ticket_id + ", event_id=" + event_id + ", price=" + price + ", available_quantity=" + available_quantity + '}';
     }
-    
-    
+
 }

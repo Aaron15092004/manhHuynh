@@ -9,38 +9,49 @@ package entity;
  * @author Admin
  */
 public class User {
+
     private int user_id;
     private String full_name;
     private String email;
     private String password;
-    private String role; // EVENT_CREATOR, ATTENDEE, ADMIN
-    private String status; // ACTIVE, BLOCKED
+    private int role_id; // EVENT_CREATOR, ATTENDEE, ADMIN
+
 
     public User() {
     }
 
-    public User(int user_id, String full_name, String email, String password, String role, String status) {
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String email, String password, String full_name) {
+        this.email = email;
+        this.password = password;
+        this.full_name = full_name;
+    }
+
+    public User(int user_id, String full_name, String email, String password, int role_id) {
         this.user_id = user_id;
         this.full_name = full_name;
         this.email = email;
         this.password = password;
-        this.role = role;
-        this.status = status;
+        this.role_id = role_id;
     }
 
-    public int getUserId() {
+    public int getUser_id() {
         return user_id;
     }
 
-    public void setUserId(int user_id) {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 
-    public String getFullName() {
+    public String getFull_name() {
         return full_name;
     }
 
-    public void setFullName(String full_name) {
+    public void setFull_name(String full_name) {
         this.full_name = full_name;
     }
 
@@ -60,26 +71,20 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public int getRole_id() {
+        return role_id;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
     }
 
     @Override
     public String toString() {
-        return "User{" + "user_id=" + user_id + ", full_name=" + full_name + ", email=" + email + ", password=" + password + ", role=" + role + ", status=" + status + '}';
+        return "User{" + "user_id=" + user_id + ", full_name=" + full_name + ", email=" + email + ", password=" + password + ", role_id=" + role_id + '}';
     }
     
+
     
+
 }

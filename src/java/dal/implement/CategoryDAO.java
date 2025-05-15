@@ -21,5 +21,9 @@ public class CategoryDAO extends GenericDAO<Category> {
         return insertGenericDAO(category);
     }
     
-    
+    public static void main(String[] args) {
+        for (Category user : new CategoryDAO().findAll()) {
+            System.out.println(user);
+        }
+    }
 }

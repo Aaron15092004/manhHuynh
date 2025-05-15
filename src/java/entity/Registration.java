@@ -4,30 +4,29 @@
  */
 package entity;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 /**
  *
  * @author Admin
  */
 public class Registration {
+
     private int registration_id;
     private int user_id; // Foreign key to User
     private int event_id; // Foreign key to Event
-    private int ticket_id; // Foreign key to Ticket
-    private LocalDateTime registered_at;
-    private String status; // REGISTERED, CANCELLED
+    private int ticket_quantity; // Foreign key to Ticket
+    private int payment_id;
 
     public Registration() {
     }
 
-    public Registration(int registration_id, int user_id, int event_id, int ticket_id, LocalDateTime registered_at, String status) {
+    public Registration(int registration_id, int user_id, int event_id, int ticket_quantity, int payment_id) {
         this.registration_id = registration_id;
         this.user_id = user_id;
         this.event_id = event_id;
-        this.ticket_id = ticket_id;
-        this.registered_at = registered_at;
-        this.status = status;
+        this.ticket_quantity = ticket_quantity;
+        this.payment_id = payment_id;
     }
 
     public int getRegistration_id() {
@@ -54,34 +53,27 @@ public class Registration {
         this.event_id = event_id;
     }
 
-    public int getTicket_id() {
-        return ticket_id;
+    public int getTicket_quantity() {
+        return ticket_quantity;
     }
 
-    public void setTicket_id(int ticket_id) {
-        this.ticket_id = ticket_id;
+    public void setTicket_quantity(int ticket_quantity) {
+        this.ticket_quantity = ticket_quantity;
     }
 
-    public LocalDateTime getRegisteredAt() {
-        return registered_at;
+    public int getPayment_id() {
+        return payment_id;
     }
 
-    public void setRegisteredAt(LocalDateTime registered_at) {
-        this.registered_at = registered_at;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPayment_id(int payment_id) {
+        this.payment_id = payment_id;
     }
 
     @Override
     public String toString() {
-        return "Registration{" + "registration_id=" + registration_id + ", user_id=" + user_id + ", event_id=" + event_id + ", ticket_id=" + ticket_id + ", registered_at=" + registered_at + ", status=" + status + '}';
+        return "Registration{" + "registration_id=" + registration_id + ", user_id=" + user_id + ", event_id=" + event_id + ", ticket_quantity=" + ticket_quantity + ", payment_id=" + payment_id + '}';
     }
     
     
+
 }

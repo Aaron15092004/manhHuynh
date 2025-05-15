@@ -11,8 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.sql.Timestamp;
+
 /**
  *
  * @author ADMIN
@@ -208,6 +211,14 @@ public abstract class GenericDAO<T> extends DBContext {
         Class<?> fieldType = field.getType();
         String fieldName = field.getName();
 
+        //kiểm tra xem fieldType có các collection như List, set,... hay không
+        if (Collection.class.isAssignableFrom(fieldType)) {
+            return null; //bỏ qua và không xử lý
+        }//kiểm tra có phải 1 map hay không 
+        else if (Map.class.isAssignableFrom(fieldType)) {
+            return null; //bỏ qua 
+        }
+
         // Kiểm tra kiểu dữ liệu và convert sang đúng kiểu
         if (fieldType == String.class) {
             return rs.getString(fieldName);
@@ -221,6 +232,8 @@ public abstract class GenericDAO<T> extends DBContext {
             return rs.getBoolean(fieldName);
         } else if (fieldType == float.class || fieldType == Float.class) {
             return rs.getFloat(fieldName);
+        } else if (fieldType == Timestamp.class) {
+            return rs.getTimestamp(fieldName);
         } else {
             return rs.getObject(fieldName);
         }
@@ -289,12 +302,25 @@ public abstract class GenericDAO<T> extends DBContext {
      * @return true: delete thành công | false: delete thất bại
      */
     protected boolean deleteGenericDAO(String sql, Map<String, Object> parameterMap) {
+        // KIỂM TRA: Đảm bảo có mệnh đề WHERE trong câu lệnh SQL
+        if (!sql.toUpperCase().contains("WHERE")) {
+            System.err.println("CẢNH BÁO: Câu lệnh DELETE không có mệnh đề WHERE");
+            System.err.println("Câu lệnh SQL: " + sql);
+            return false; // Không thực hiện xóa nếu không có WHERE
+        }
+
         List<Object> parameters = new ArrayList<>();
+        StringBuilder debugInfo = new StringBuilder();
+        debugInfo.append("SQL: ").append(sql).append("\n");
+        debugInfo.append("Parameters: ");
 
         for (Map.Entry<String, Object> entry : parameterMap.entrySet()) {
             Object conditionValue = entry.getValue();
             parameters.add(conditionValue);
+            debugInfo.append(entry.getKey()).append("=").append(conditionValue).append(", ");
         }
+
+        System.out.println(debugInfo.toString());
 
         try {
             connection = getConnection();
@@ -306,14 +332,23 @@ public abstract class GenericDAO<T> extends DBContext {
                 statement.setObject(index, value);
                 index++;
             }
-            statement.executeUpdate();
+
+            // Thêm một bước xác nhận trước khi xóa
+            System.out.println("CẢNH BÁO: Sắp thực hiện xóa. Câu lệnh: " + sql);
+
+            int rowsAffected = statement.executeUpdate();
+            System.out.println("Rows affected: " + rowsAffected);
+
             connection.commit();
             return true;
         } catch (SQLException e) {
+            System.err.println("Error in deleteGenericDAO: " + e.getMessage());
             try {
-                connection.rollback();
+                if (connection != null) {
+                    connection.rollback();
+                }
             } catch (SQLException ex) {
-                System.err.println("4USER: Bắn Exception ở hàm delete: " + ex.getMessage());
+                System.err.println("Error during rollback: " + ex.getMessage());
             }
             return false;
         } finally {
@@ -325,7 +360,7 @@ public abstract class GenericDAO<T> extends DBContext {
                     statement.close();
                 }
             } catch (SQLException e) {
-                System.err.println("4USER: Bắn Exception ở hàm update: " + e.getMessage());
+                System.err.println("Error closing resources: " + e.getMessage());
             }
         }
     }
@@ -335,14 +370,15 @@ public abstract class GenericDAO<T> extends DBContext {
      * trong database
      *
      * @param object: đối tượng chứa các thông tin muốn insert
-     * @return 0: insert thất bại: || !0 : insert thành công
+     * @return ID của bản ghi mới được tạo hoặc 0 nếu insert thất bại
      */
     protected int insertGenericDAO(T object) {
         Class<?> clazz = object.getClass();
         Field[] fields = clazz.getDeclaredFields();
 
         StringBuilder sqlBuilder = new StringBuilder();
-        sqlBuilder.append("INSERT INTO ").append(clazz.getSimpleName()).append(" (");
+        StringBuilder valueBuilder = new StringBuilder();
+        sqlBuilder.append("INSERT INTO [dbo].[").append(clazz.getSimpleName()).append("] (");
 
         List<Object> parameters = new ArrayList<>();
 
@@ -357,28 +393,33 @@ public abstract class GenericDAO<T> extends DBContext {
                 fieldValue = null;
             }
 
-            if (fieldValue != null && !fieldName.equalsIgnoreCase("id")) {
-                sqlBuilder.append(fieldName).append(", ");
+            // Chỉ thêm các trường không phải ID tự tăng và có giá trị không null
+            if (fieldValue != null && !fieldName.equalsIgnoreCase("event_id") && !fieldName.equalsIgnoreCase(clazz.getSimpleName() + "_id")) {
+                sqlBuilder.append("[").append(fieldName).append("], ");
+                valueBuilder.append("?, ");
                 parameters.add(fieldValue);
             }
         }
 
-        // Xóa dấu phẩy cuối cùng
+        // Xóa dấu phẩy cuối cùng trong danh sách trường
         if (sqlBuilder.charAt(sqlBuilder.length() - 2) == ',') {
             sqlBuilder.delete(sqlBuilder.length() - 2, sqlBuilder.length());
         }
 
         sqlBuilder.append(") VALUES (");
+
+        // Xóa dấu phẩy cuối cùng trong danh sách giá trị
+        if (valueBuilder.length() > 0 && valueBuilder.charAt(valueBuilder.length() - 2) == ',') {
+            valueBuilder.delete(valueBuilder.length() - 2, valueBuilder.length());
+        }
+
+        sqlBuilder.append(valueBuilder).append(")");
+
+        System.out.println("SQL Insert Query: " + sqlBuilder.toString());
         for (int i = 0; i < parameters.size(); i++) {
-            sqlBuilder.append("?, ");
+            System.out.println("Parameter " + (i + 1) + ": " + parameters.get(i));
         }
 
-        // Xóa dấu phẩy cuối cùng
-        if (sqlBuilder.charAt(sqlBuilder.length() - 2) == ',') {
-            sqlBuilder.delete(sqlBuilder.length() - 2, sqlBuilder.length());
-        }
-
-        sqlBuilder.append(")");
         connection = getConnection();
         int id = 0;
         try {
@@ -393,44 +434,63 @@ public abstract class GenericDAO<T> extends DBContext {
             }
 
             // Thực thi câu truy vấn
-            statement.executeUpdate();
+            int rowsAffected = statement.executeUpdate();
 
-            // Lấy khóa chính (ID) được tạo tự động
-            resultSet = statement.getGeneratedKeys();
-            if (resultSet.next()) {
-                id = resultSet.getInt(1);
+            if (rowsAffected > 0) {
+                // Lấy khóa chính (ID) được tạo tự động
+                resultSet = statement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    id = resultSet.getInt(1);
+                    System.out.println("Generated ID: " + id);
+                } else {
+                    // Nếu không lấy được ID tự động, thử truy vấn lại để lấy ID mới nhất
+                    String idColumnName = clazz.getSimpleName() + "_id";
+                    try (PreparedStatement psSelect = connection.prepareStatement(
+                            "SELECT TOP 1 [" + idColumnName + "] FROM [dbo].[" + clazz.getSimpleName()
+                            + "] ORDER BY [" + idColumnName + "] DESC")) {
+                        ResultSet rsSelect = psSelect.executeQuery();
+                        if (rsSelect.next()) {
+                            id = rsSelect.getInt(1);
+                            System.out.println("Retrieved latest ID: " + id);
+                        }
+                    }
+                }
             }
-            System.err.println("insertGenericDAO: " + sqlBuilder.toString());
+
             // Xác nhận giao dịch thành công
             connection.commit();
         } catch (SQLException e) {
             try {
-                System.err.println("4USER: Bắn Exception ở hàm insert: " + e.getMessage());
+                System.err.println("Exception in insertGenericDAO: " + e.getMessage());
+                e.printStackTrace();
                 // Hoàn tác giao dịch nếu xảy ra lỗi
                 connection.rollback();
             } catch (SQLException ex) {
-                System.err.println("4USER: Bắn Exception ở hàm insert: " + ex.getMessage());
+                System.err.println("Exception during rollback: " + ex.getMessage());
+                ex.printStackTrace();
             }
         } finally {
             // Đảm bảo đóng kết nối và tài nguyên
             try {
-                if (connection != null) {
-                    connection.close();
+                if (resultSet != null) {
+                    resultSet.close();
                 }
                 if (statement != null) {
                     statement.close();
                 }
-                if (resultSet != null) {
-                    resultSet.close();
+                if (connection != null) {
+                    connection.setAutoCommit(true);
+                    connection.close();
                 }
             } catch (SQLException e) {
-                System.err.println("4USER: Bắn Exception ở hàm insert: " + e.getMessage());
+                System.err.println("Exception when closing resources: " + e.getMessage());
+                e.printStackTrace();
             }
         }
         // Trả về ID được tạo tự động (nếu có)
         return id;
     }
-    
+
     protected int insertGenericDAO(String sql, Map<String, Object> parameterMap) {
         List<Object> parameters = new ArrayList<>();
 
@@ -617,9 +677,9 @@ public abstract class GenericDAO<T> extends DBContext {
         }
         return total;
     }
-    
+
     public abstract List<T> findAll();
-    
+
     public abstract int insert(T t);
 
 }

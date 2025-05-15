@@ -4,33 +4,35 @@
  */
 package entity;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
 public class Payment {
+
     private int payment_id;
-    private int user_id; // Foreign key to User
-    private int event_id; // Foreign key to Event
-    private int ticket_id; // Foreign key to Ticket
     private double amount; // Số tiền thanh toán (USD)
-    private LocalDateTime payment_date;
+    private Timestamp payment_date;
     private String status; // PENDING, COMPLETED, FAILED
+    private int user_id;
+    List<Registration> listRegistration = new ArrayList<>();
 
     public Payment() {
     }
 
-    public Payment(int payment_id, int user_id, int event_id, int ticket_id, double amount, LocalDateTime payment_date, String status) {
+    public Payment(int payment_id, double amount, Timestamp payment_date, String status, int user_id) {
         this.payment_id = payment_id;
-        this.user_id = user_id;
-        this.event_id = event_id;
-        this.ticket_id = ticket_id;
         this.amount = amount;
         this.payment_date = payment_date;
         this.status = status;
+        this.user_id = user_id;
     }
+
+    
 
     public int getPayment_id() {
         return payment_id;
@@ -38,30 +40,6 @@ public class Payment {
 
     public void setPayment_id(int payment_id) {
         this.payment_id = payment_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public int getEvent_id() {
-        return event_id;
-    }
-
-    public void setEvent_id(int event_id) {
-        this.event_id = event_id;
-    }
-
-    public int getTicket_id() {
-        return ticket_id;
-    }
-
-    public void setTicket_id(int ticket_id) {
-        this.ticket_id = ticket_id;
     }
 
     public double getAmount() {
@@ -72,11 +50,11 @@ public class Payment {
         this.amount = amount;
     }
 
-    public LocalDateTime getPaymentDate() {
+    public Timestamp getPaymentDate() {
         return payment_date;
     }
 
-    public void setPaymentDate(LocalDateTime payment_date) {
+    public void setPaymentDate(Timestamp payment_date) {
         this.payment_date = payment_date;
     }
 
@@ -88,10 +66,35 @@ public class Payment {
         this.status = status;
     }
 
+    public Timestamp getPayment_date() {
+        return payment_date;
+    }
+
+    public void setPayment_date(Timestamp payment_date) {
+        this.payment_date = payment_date;
+    }
+
+    public List<Registration> getListRegistration() {
+        return listRegistration;
+    }
+
+    public void setListRegistration(List<Registration> listRegistration) {
+        this.listRegistration = listRegistration;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
     @Override
     public String toString() {
-        return "Payment{" + "payment_id=" + payment_id + ", user_id=" + user_id + ", event_id=" + event_id + ", ticket_id=" + ticket_id + ", amount=" + amount + ", payment_date=" + payment_date + ", status=" + status + '}';
+        return "Payment{" + "payment_id=" + payment_id + ", amount=" + amount + ", payment_date=" + payment_date + ", status=" + status + ", user_id=" + user_id + ", listRegistration=" + listRegistration + '}';
     }
+
     
-    
+
 }
